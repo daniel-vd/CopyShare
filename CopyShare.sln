@@ -5,6 +5,19 @@ VisualStudioVersion = 16.0.30709.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopyShare", "CopyShare\CopyShare.csproj", "{862D50E0-A69C-4250-8B94-78FF87FF9A3F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{39FFD94C-4A99-44F2-91A0-2F18C0A9F65A}"
+	ProjectSection(SolutionItems) = preProject
+		CopyShare.0.0.1.nupkg = CopyShare.0.0.1.nupkg
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Releases", "Releases", "{BF318E37-09EA-465C-BF34-82E9284CB421}"
+	ProjectSection(SolutionItems) = preProject
+		Releases\CopyShare-0.0.1-full.nupkg = Releases\CopyShare-0.0.1-full.nupkg
+		Releases\RELEASES = Releases\RELEASES
+		Releases\Setup.exe = Releases\Setup.exe
+		Releases\Setup.msi = Releases\Setup.msi
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

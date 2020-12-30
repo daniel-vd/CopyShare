@@ -1,7 +1,9 @@
 ﻿using CopyShare.PictureHandling;
+using Squirrel;
 using System;
 using System.Drawing;
 using System.Net;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using ToastNotifications.Messages;
@@ -38,9 +40,31 @@ namespace CopyShare
         public static Image image2;
         public static Image image3;
 
+
+         static async Task Update ()
+        {
+
+            using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/daniel-vd/CopyShare"))
+            {
+                try
+                {
+                    Console.WriteLine("hallo");
+                    await mgr.Result.UpdateApp();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+
+
+            }
+        }
         public MainWindow()
         {
             InitializeComponent();
+
+            Console.WriteLine("hallo1");
 
             while (!CheckForInternetConnection())
             {
@@ -76,7 +100,7 @@ namespace CopyShare
             ni.ContextMenu = contextMenu1;
 
 
-
+            Update();
 
 
         }

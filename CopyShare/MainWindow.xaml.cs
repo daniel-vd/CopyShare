@@ -1,7 +1,9 @@
-﻿using CopyShare.PictureHandling;
-using Squirrel;
+﻿using AutoUpdaterDotNET;
+using CopyShare.PictureHandling;
 using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
@@ -40,29 +42,16 @@ namespace CopyShare
         public static Image image2;
         public static Image image3;
 
-
-         static async Task Update ()
-        {
-
-            using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/daniel-vd/CopyShare"))
-            {
-                try
-                {
-                    Console.WriteLine("hallo");
-                    await mgr.Result.UpdateApp();
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-
-
-            }
-        }
         public MainWindow()
         {
+            // Prevent app from being open multiple times
+            String thisprocessname = Process.GetCurrentProcess().ProcessName;
+
+            if (Process.GetProcesses().Count(p => p.ProcessName == thisprocessname) > 1)
+                return;
+
             InitializeComponent();
+
 
             Console.WriteLine("hallo1");
 
@@ -99,8 +88,7 @@ namespace CopyShare
                 };
             ni.ContextMenu = contextMenu1;
 
-
-            Update();
+            AutoUpdater.Start("https://organometallic-gues.000webhostapp.com/CopyShareUpdater.xml");
 
 
         }

@@ -47,7 +47,7 @@ namespace CopyShare
             // Prevent app from being open multiple times
             String thisprocessname = Process.GetCurrentProcess().ProcessName;
 
-            if (Process.GetProcesses().Count(p => p.ProcessName == thisprocessname) > 1)
+            if (Process.GetProcesses().Count(p => p.ProcessName == thisprocessname) > 1)hallo!
                 return;
 
             InitializeComponent();

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CopyShare"
         mc:Ignorable="d"
-        Title="CopyShare 0.0.5" Width="1000" Height="627.2">
+        Title="CopyShare 0.0.6" Width="1000" Height="627.2">
     <Grid Margin="20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="11*"/>

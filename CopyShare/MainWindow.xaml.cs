@@ -91,7 +91,7 @@ namespace CopyShare
             ni.ContextMenu = contextMenu1;
 
             //Start external auto updater
-            AutoUpdater.Start("https://organometallic-gues.000webhostapp.com/CopyShareUpdater.xml");
+            AutoUpdater.Start("https://raw.githubusercontent.com/daniel-vd/CopyShare/master/CopyShareUpdater.xml");
         }
 
         private void close_App(object sender, EventArgs e)

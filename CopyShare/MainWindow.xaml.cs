@@ -48,17 +48,20 @@ namespace CopyShare
             String thisprocessname = Process.GetCurrentProcess().ProcessName;
 
             if (Process.GetProcesses().Count(p => p.ProcessName == thisprocessname) > 1)
-                return;
+                CloseApp();
+
+            while (!CheckForInternetConnection())
+            {
+                MessageBoxResult result = MessageBox.Show("No connection, do you want to retry?", "CopyShare", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No)
+                {
+                    CloseApp();
+                }
+            }
 
             InitializeComponent();
 
 
-            Console.WriteLine("hallo1");
-
-            while (!CheckForInternetConnection())
-            {
-                MessageBox.Show("No connection.");
-            }
 
             progressBar = progressBar1;
             progressBar_2 = progressBar2;
@@ -74,9 +77,8 @@ namespace CopyShare
 
             System.Windows.Forms.ContextMenu contextMenu1 = new System.Windows.Forms.ContextMenu();
 
-            contextMenu1.MenuItems.Add("&Open Application");
-            contextMenu1.MenuItems.Add("S&uspend Application");
-            contextMenu1.MenuItems.Add("E&xit", new EventHandler(close_App));
+            contextMenu1.MenuItems.Add("Open CopyShare", new EventHandler(open_App));
+            contextMenu1.MenuItems.Add("Exit CopyShare", new EventHandler(close_App));
 
             ni.Icon = new System.Drawing.Icon(@"C:\Users\vandi\Dropbox\Projects\CopyShare\CopyShare\Main.ico");
             ni.Visible = true;
@@ -88,12 +90,22 @@ namespace CopyShare
                 };
             ni.ContextMenu = contextMenu1;
 
-            AutoUpdater.Start("https://organometallic-gues.000webhostapp.com/CopyShareUpdater.xml");
-
-
+            //Start external auto updater
+            AutoUpdater.Start("https://raw.githubusercontent.com/daniel-vd/CopyShare/master/CopyShareUpdater.xml");
         }
 
         private void close_App(object sender, EventArgs e)
+        {
+            CloseApp();
+        }
+
+        private void open_App(object sender, EventArgs e)
+        {
+            this.Show();
+            this.WindowState = WindowState.Normal;
+        }
+
+        void CloseApp()
         {
             ni.Dispose();
 

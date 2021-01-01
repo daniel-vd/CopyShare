@@ -92,8 +92,6 @@ namespace CopyShare
 
             //Start external auto updater
             AutoUpdater.Start("https://organometallic-gues.000webhostapp.com/CopyShareUpdater.xml");
-
-
         }
 
         private void close_App(object sender, EventArgs e)

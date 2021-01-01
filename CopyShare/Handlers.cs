@@ -30,7 +30,7 @@ namespace CopyShare
             return System.Windows.Media.Imaging.BitmapFrame.Create(stream);
         }
 
-          
+        //  
         public static bool ClipBoardContainsDropFileImg()
         {
             if (Clipboard.ContainsFileDropList())

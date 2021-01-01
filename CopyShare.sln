@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.30709.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopyShare", "CopyShare\CopyShare.csproj", "{862D50E0-A69C-4250-8B94-78FF87FF9A3F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{62112191-1B2C-48F0-8541-8A61DC191E87}"
+	ProjectSection(SolutionItems) = preProject
+		CopyShareUpdater.xml = CopyShareUpdater.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -51,7 +51,7 @@ namespace CopyShare
                     textHandling.UploadText(e.Content.ToString());
 
                     Notifiercs notifiercs = new Notifiercs();
-                    notifiercs.notifier.ShowSuccess("Clipboard uploaded");
+                    //notifiercs.notifier.ShowSuccess("Clipboard uploaded");
                 }
             }
 

@@ -1,5 +1,6 @@
 ﻿using AutoUpdaterDotNET;
 using CopyShare.PictureHandling;
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -42,13 +43,31 @@ namespace CopyShare
         public static Image image2;
         public static Image image3;
 
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern void SwitchToThisWindow(IntPtr hWnd, bool fAltTab);
+
+
         public MainWindow()
         {
             // Prevent app from being open multiple times
-            String thisprocessname = Process.GetCurrentProcess().ProcessName;
+            foreach (var process in Process.GetProcesses())
+            {
+                if (process.ProcessName == Process.GetCurrentProcess().ProcessName)
+                {
+                    if (process.Id != Process.GetCurrentProcess().Id)
+                    {
+                        ShowWindow(process.MainWindowHandle, 5);
+                        SwitchToThisWindow(process.MainWindowHandle, true);
 
-            if (Process.GetProcesses().Count(p => p.ProcessName == thisprocessname) > 1)
-                CloseApp();
+                        CloseApp();
+                    }
+                }
+            }
+
+            //if (Process.GetProcesses().Count(p => p.ProcessName == thisprocessname) > 1)
+            //    CloseApp();
 
             while (!CheckForInternetConnection())
             {
@@ -61,7 +80,7 @@ namespace CopyShare
 
             InitializeComponent();
 
-
+            RegisterInStartup();
 
             progressBar = progressBar1;
             progressBar_2 = progressBar2;
@@ -87,11 +106,14 @@ namespace CopyShare
                 {
                     this.Show();
                     this.WindowState = WindowState.Normal;
+                    this.Activate();
                 };
             ni.ContextMenu = contextMenu1;
 
             //Start external auto updater
             AutoUpdater.Start("https://raw.githubusercontent.com/daniel-vd/CopyShare/master/CopyShareUpdater.xml");
+
+            this.Hide();
         }
 
         private void close_App(object sender, EventArgs e)
@@ -103,6 +125,7 @@ namespace CopyShare
         {
             this.Show();
             this.WindowState = WindowState.Normal;
+            this.Activate();
         }
 
         void CloseApp()
@@ -110,6 +133,16 @@ namespace CopyShare
             ni.Dispose();
 
             Environment.Exit(1);
+        }
+
+        private void RegisterInStartup()
+        {
+            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
+                    ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if (registryKey.GetValue("CopyShare") == null)
+            {
+                registryKey.SetValue("CopyShare", System.Reflection.Assembly.GetExecutingAssembly().Location);
+            }
         }
 
 
